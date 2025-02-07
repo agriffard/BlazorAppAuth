@@ -1,0 +1,33 @@
+@using BlazorBootstrap
+<div class="top-row px-4">
+    <AuthorizeView>
+        <Authorized>
+            <a @onclick="OnShowOffcanvasUserClick" style="cursor:pointer">
+                @context.User.Identity?.Name
+            </a>
+        </Authorized>
+        <NotAuthorized>
+            <NavLink href="Account/Login">Login</NavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+<Offcanvas @ref="offcanvasUser">
+    <BodyTemplate>
+        <AuthorizeView>
+            <Authorized>
+                <NavLink class="nav-link nav-link-user" href="Account/Manage">
+                    <span class="name">
+                        <i class="mdi mdi-account-box"></i> Profile
+                    </span>
+                </NavLink>
+                @* <form action="Account/Logout" method="post">
+                    <AntiforgeryToken />
+                    <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                    <Button Size="ButtonSize.Small" Type="ButtonType.Submit" Class="nav-link">
+                        Logout
+                    </Button>
+                </form> *@
+            </Authorized>
+        </AuthorizeView>
+    </BodyTemplate>
+</Offcanvas>
